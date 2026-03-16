@@ -40,5 +40,9 @@ public class Task {
 	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	public String toString() {
+		return id + ". " + description + " (" + status + ")";
+	}
  
 }

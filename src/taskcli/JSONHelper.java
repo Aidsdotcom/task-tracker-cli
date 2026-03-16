@@ -28,7 +28,7 @@ public class JSONHelper {
 		for (int i = 0; i < tasks.size(); i++) {
 			
 			json.append("{\n");
-			json.append("\"id\":" + tasks.get(i).getID() + "\",");
+			json.append("\"id\":" + tasks.get(i).getID() + ",");
 			json.append("\"description\":\"" + tasks.get(i).getDescription() + "\",");
 			json.append("\"status\":\"" + tasks.get(i).getStatus() + "\",");
 			json.append("\"createdAt\":\"" + tasks.get(i).getCreatedAt() + "\",");
@@ -49,8 +49,13 @@ public class JSONHelper {
 	public List<Task> loadTasks()  {
 		ensureFileExists();
 		List <Task> tasks = new ArrayList<>();
+		
 		try {
 		String json = Files.readString(Paths.get("tasks.json"));
+		
+		if (json.equals("[]")) {
+			return tasks;
+		}
 		json = json.trim();
 		json = json.substring(1, json.length() - 1);
 		
@@ -89,6 +94,4 @@ public class JSONHelper {
 		
 		return tasks;
 	}
-	}
-
 }
